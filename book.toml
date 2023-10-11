@@ -1,0 +1,6 @@
+[book]
+authors = ["Lawrence Bethlenfalvy"]
+language = "en"
+multilingual = false
+src = "src"
+title = "Orchid Reference"
