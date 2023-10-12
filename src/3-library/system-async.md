@@ -23,15 +23,15 @@ Orchid's IO is actually completely asynchronous; `write_str` and `flush` both ta
 **set_timer** `bool -> number -> cmd -> (cmd -> cmd) -> cmd` <br/>
 Sets a timer. Parameters specify whether the timer is recurring, the delay in seconds, the command to be executed when the timer fires, and the sync next step. The sync next step receives a canceller which is itself a command. If this command is called, later iterations of the timer will not run.
 
-```
+```orc
 import system::async::(set_timer, yield)
 import system::io::(readln, println)
 import std::exit_status
 
-const main := (
-  set_timer true 1 (println "y" yield) \cancel.
-    readln \a.
-      cancel
-        exit_status::success
-)
+const main := do{
+  cps cancel = set_timer true 1 (println "y" yield);
+  cps _ = readln;
+  cps cancel;
+  exit_status::success
+}
 ```
