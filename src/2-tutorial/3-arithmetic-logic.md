@@ -44,6 +44,6 @@ const main := "foo and \
                bar"
 ```
 
-Strings support a variety of methods described in [std::string](../library/std-string.md)
+Strings support a variety of methods described in [std::string](../3-library/std-string.md)
 
 numbers can be stringified with `std::to_string`, strings can be parsed to numbers via `std::to_uint` or `std::to_float` respectively. All three functions accept their return type and pass it through

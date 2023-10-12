@@ -1,0 +1,5 @@
+# IO
+
+I/O is completely asynchronous. Each I/O operation takes the same 3 final arguments; success, error, continuation. The continuation is evaluated synchronously immediately after the command is received, and can be used to schedule multiple concurrent I/O operations. For the final I/O operation in a given command the continuation must be set to `system::async::yield` which either pops a task from the queue or blocks in wait if there are no pending tasks. `yield` does not accept a continuation, and in a block it should not be called with `cps`. It is the final value at the end of a block.
+
+Success is the next command to execute if the task at hand has no result, otherwise it's a function mapping the result to the next command. The failure is a function from the error data to the next command. In the future the error data will probably be a `std::map`, but right now it's just the integer `0`. The continuation is a command.
